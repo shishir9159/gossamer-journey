@@ -1,3 +1,9 @@
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
+
 type nodeInfo struct {
 	node        *TreeNode
 	depth       int
