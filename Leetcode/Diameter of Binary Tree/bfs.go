@@ -1,3 +1,9 @@
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
+
 func diameterOfBinaryTree(root *TreeNode) int {
 	diameter := 0
 	depth := map[*TreeNode]int{}
