@@ -14,6 +14,7 @@ func depth(node *TreeNode) int {
 	if left == -1 || right == -1 || math.Abs(float64(left-right)) > 1 {
 		return -1
 	}
+
 	return max(left, right) + 1
 }
 
