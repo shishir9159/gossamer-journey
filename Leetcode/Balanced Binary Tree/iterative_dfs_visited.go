@@ -1,3 +1,9 @@
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
+
 func isBalanced(root *TreeNode) bool {
 	type nodeInfo struct {
 		node    *TreeNode
