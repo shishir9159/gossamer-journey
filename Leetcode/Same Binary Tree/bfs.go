@@ -1,3 +1,10 @@
+
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
+
 func isSameTree(p *TreeNode, q *TreeNode) bool {
 	queue1, queue2 := []*TreeNode{p}, []*TreeNode{q}
 
