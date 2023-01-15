@@ -1,3 +1,9 @@
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
+
 func isSameTree(p *TreeNode, q *TreeNode) bool {
 	if p == nil && q != nil {
 		return false
@@ -10,4 +16,14 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 	}
 
 	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
+}
+
+func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
+	if root == nil {
+		return subRoot == nil
+	} else if isSameTree(root, subRoot) {
+		return true
+	}
+
+	return isSubtree(root.Left, subRoot) || isSubtree(root.Right, subRoot)
 }
