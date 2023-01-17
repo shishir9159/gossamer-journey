@@ -1,9 +1,3 @@
-// type TreeNode struct {
-// 	Val   int
-// 	Left  *TreeNode
-// 	Right *TreeNode
-// }
-
 func serialize(root *TreeNode) string {
 	if root == nil {
 		return "$#"
@@ -12,38 +6,36 @@ func serialize(root *TreeNode) string {
 	return "$" + strconv.Itoa(root.Val) + serialize(root.Left) + serialize(root.Right)
 }
 
-func zFunction(s string) []int {
+func prefixFunction(s string) []int {
 	n := len(s)
-	z := make([]int, n)
-	left, right := 0, 0
+	pi := make([]int, n)
 
 	for index := 1; index < n; index++ {
-		if index <= right {
-			z[index] = min(right-index+1, z[index-left])
+		length := pi[index-1]
+
+		for length > 0 && s[index] != s[length] {
+			length = pi[length-1]
 		}
 
-		for index+z[index] < n && s[z[index]] == s[index+z[index]] {
-			z[index]++
+		if s[index] == s[length] {
+			length++
 		}
 
-		if index+z[index]-1 > right {
-			left = index
-			right = index + z[index] - 1
-		}
+		pi[index] = length
 	}
 
-	return z
+	return pi
 }
 
 func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
 	serializedSubRoot := serialize(subRoot)
 	combined := serializedSubRoot + "|" + serialize(root)
 
-	zValues := zFunction(combined)
+	piValues := prefixFunction(combined)
 	subLen := len(serializedSubRoot)
 
 	for i := subLen + 1; i < len(combined); i++ {
-		if zValues[i] == subLen {
+		if piValues[i] == subLen {
 			return true
 		}
 	}
