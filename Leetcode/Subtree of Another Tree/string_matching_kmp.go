@@ -8,7 +8,7 @@ func serialize(root *TreeNode) string {
 
 func prefixFunction(s string) []int {
 	n := len(s)
-	pi := make([]int, n)
+	pi := make([]int, n) // pi[i] is the length of the longest proper prefix of combined[:i+1] that is also a suffix
 
 	for index := 1; index < n; index++ {
 		length := pi[index-1]
