@@ -1,8 +1,8 @@
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+// type TreeNode struct {
+// 	Val   int
+// 	Left  *TreeNode
+// 	Right *TreeNode
+// }
 
 func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
 	var serialize func(*TreeNode) string
