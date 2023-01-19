@@ -5,17 +5,21 @@
 // }
 
 func isSameTree(p *TreeNode, q *TreeNode) bool {
-	if p == nil && q != nil {
-		return false
-	} else if p != nil && q == nil {
-		return false
-	} else if p == nil && q == nil {
-		return true
-	} else if p.Val != q.Val {
-		return false
+	queue := [][2]*TreeNode{{p, q}}
+	for len(queue) > 0 {
+		a, b := queue[0][0], queue[0][1]
+		queue = queue[1:]
+
+		if a == nil && b == nil {
+			continue
+		} else if a == nil || b == nil || a.Val != b.Val {
+			return false
+		}
+
+		queue = append(queue, [2]*TreeNode{a.Left, b.Left}, [2]*TreeNode{a.Right, b.Right})
 	}
 
-	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
+	return true
 }
 
 func isSubtree(root *TreeNode, subRoot *TreeNode) bool {
