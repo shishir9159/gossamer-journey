@@ -1,3 +1,12 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 func levelOrder(root *TreeNode) [][]int {
 	order := [][]int{}
 	stack, depths := []*TreeNode{root}, []int{0}
