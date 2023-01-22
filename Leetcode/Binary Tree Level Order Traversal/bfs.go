@@ -1,20 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 func levelOrder(root *TreeNode) [][]int {
-	depth, order := 0, [][]int{}
+	order := [][]int{}
 
-	stack := []*TreeNode{root}
-	for len(stack) > 0 {
-		node := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
+	if root == nil {
+		return nil
+	}
 
-		if node == nil {
-			continue
-		} else if len(order) == depth {
-			order = append(order, []int{})
+	queue := []*TreeNode{root}
+	for len(queue) > 0 {
+		levelNodes := []int{}
+
+		for index := 0; index < len(queue); index++ {
+			node := queue[0]
+			queue = queue[1:]
+			levelNodes = append(levelNodes, node.Val)
+
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+			}
+
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
 		}
 
-		order[depth] = append(order[depth], node.Val)
-		stack = append(stack, node.Left, node.Right)
-		depth++
+		order = append(order, levelNodes)
 	}
 
 	return order
