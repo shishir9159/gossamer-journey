@@ -7,7 +7,7 @@
  * }
  */
 
-func levelOrder(root *TreeNode) [][]int {
+func rightSideView(root *TreeNode) []int {
 	order, stack, depths := [][]int{}, []*TreeNode{root}, []int{0}
 	for len(stack) > 0 {
 		node, depth := stack[len(stack)-1], depths[len(stack)-1]
