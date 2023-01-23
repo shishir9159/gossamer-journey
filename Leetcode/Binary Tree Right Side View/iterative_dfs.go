@@ -7,13 +7,13 @@
  * }
  */
 
-func levelOrder(root *TreeNode) [][]int {
+func rightSideView(root *TreeNode) []int {
 	type nodeInfo struct {
 		node  *TreeNode
 		depth int
 	}
 
-	order, stack := [][]int{}, []nodeInfo{{root, 0}}
+	order, stack := []int{}, []nodeInfo{{root, 0}}
 	for len(stack) > 0 {
 		top := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
@@ -21,11 +21,10 @@ func levelOrder(root *TreeNode) [][]int {
 		if top.node == nil {
 			continue
 		} else if len(order) == top.depth {
-			order = append(order, []int{})
+			order = append(order, top.node.Val)
 		}
 
-		order[top.depth] = append(order[top.depth], top.node.Val)
-		stack = append(stack, nodeInfo{top.node.Right, top.depth + 1}, nodeInfo{top.node.Left, top.depth + 1})
+		stack = append(stack, nodeInfo{top.node.Left, top.depth + 1}, nodeInfo{top.node.Right, top.depth + 1})
 	}
 
 	return order
