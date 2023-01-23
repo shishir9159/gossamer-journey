@@ -19,8 +19,8 @@ func rightSideView(root *TreeNode) []int {
 			order = append(order, node.Val)
 		}
 
-		dfs(node.Left, depth+1)
 		dfs(node.Right, depth+1)
+		dfs(node.Left, depth+1)
 	}
 
 	dfs(root, 0)
