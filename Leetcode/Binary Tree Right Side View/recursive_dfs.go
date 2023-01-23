@@ -7,8 +7,8 @@
  * }
  */
 
-func levelOrder(root *TreeNode) [][]int {
-	order := [][]int{}
+func rightSideView(root *TreeNode) []int {
+	order := []int{}
 
 	var dfs func(node *TreeNode, depth int)
 	dfs = func(node *TreeNode, depth int) {
@@ -16,10 +16,8 @@ func levelOrder(root *TreeNode) [][]int {
 		if node == nil {
 			return
 		} else if len(order) == depth {
-			order = append(order, []int{})
+			order = append(order, node.Val)
 		}
-
-		order[depth] = append(order[depth], node.Val)
 
 		dfs(node.Left, depth+1)
 		dfs(node.Right, depth+1)
