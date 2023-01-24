@@ -19,7 +19,7 @@ func rightSideView(root *TreeNode) []int {
 			order = append(order, node.Val)
 		}
 
-		stack, depths = append(stack, node.Right, node.Left), append(depths, depth+1, depth+1)
+		stack, depths = append(stack, node.Left, node.Right), append(depths, depth+1, depth+1)
 	}
 
 	return order
