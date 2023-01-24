@@ -16,19 +16,18 @@ func rightSideView(root *TreeNode) []int {
 
 	queue := []*TreeNode{root}
 	for len(queue) > 0 {
-		var rightNode *TreeNode
-
+		var rightNode int
 		// this doesn't work: for index := 0; index < len(queue); index++ {
 		for _, node := range queue {
 			queue = queue[1:]
-			rightNode = node
-
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
+			rightNode = node.Val
 
 			if node.Left != nil {
 				queue = append(queue, node.Left)
+			}
+
+			if node.Right != nil {
+				queue = append(queue, node.Right)
 			}
 		}
 
