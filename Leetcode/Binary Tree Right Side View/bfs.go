@@ -7,8 +7,8 @@
  * }
  */
 
-func levelOrder(root *TreeNode) [][]int {
-	order := [][]int{}
+func rightSideView(root *TreeNode) []int {
+	order := []int{}
 
 	if root == nil {
 		return nil
@@ -16,23 +16,23 @@ func levelOrder(root *TreeNode) [][]int {
 
 	queue := []*TreeNode{root}
 	for len(queue) > 0 {
-		levelNodes := []int{}
+		var rightNode *TreeNode
 
 		// this doesn't work: for index := 0; index < len(queue); index++ {
 		for _, node := range queue {
 			queue = queue[1:]
-			levelNodes = append(levelNodes, node.Val)
-
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
+			rightNode = node
 
 			if node.Right != nil {
 				queue = append(queue, node.Right)
 			}
+
+			if node.Left != nil {
+				queue = append(queue, node.Left)
+			}
 		}
 
-		order = append(order, levelNodes)
+		order = append(order, rightNode)
 	}
 
 	return order
