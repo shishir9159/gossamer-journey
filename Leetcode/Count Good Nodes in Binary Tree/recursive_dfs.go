@@ -1,3 +1,12 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 func goodNodes(root *TreeNode) int {
 	var dfs func(node *TreeNode, maxVal int) int
 	dfs = func(node *TreeNode, maxVal int) int {
