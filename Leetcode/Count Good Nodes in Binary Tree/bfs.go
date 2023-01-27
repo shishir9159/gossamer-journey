@@ -12,32 +12,28 @@ func goodNodes(root *TreeNode) int {
 		return 0
 	}
 
-	type Item struct {
+	type nodeInfo struct {
 		node   *TreeNode
 		maxVal int
 	}
 
-	queue := []Item{{root, root.Val}}
-	count := 0
+	count, queue := 0, []nodeInfo{{root, root.Val}}
 
 	for len(queue) > 0 {
-		item := queue[0]
+		top := queue[0]
 		queue = queue[1:]
 
-		node := item.node
-		maxVal := item.maxVal
-
-		if maxVal <= node.Val {
-			maxVal = node.Val
+		if top.maxVal <= top.node.Val {
+			top.maxVal = top.node.Val
 			count++
 		}
 
-		if node.Left != nil {
-			queue = append(queue, Item{node.Left, maxVal})
+		if top.node.Left != nil {
+			queue = append(queue, nodeInfo{top.node.Left, top.maxVal})
 		}
 
-		if node.Right != nil {
-			queue = append(queue, Item{node.Right, maxVal})
+		if top.node.Right != nil {
+			queue = append(queue, nodeInfo{top.node.Right, top.maxVal})
 		}
 	}
 
