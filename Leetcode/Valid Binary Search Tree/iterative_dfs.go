@@ -1,10 +1,19 @@
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 func isValidBST(root *TreeNode) bool {
 	type boundNode struct {
 		min, max *int
 		node     *TreeNode
 	}
 
-	stack := []boundNode{{root, nil, nil}}
+	stack := []boundNode{{nil, nil, root}}
 	for len(stack) > 0 {
 		item := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
@@ -17,25 +26,8 @@ func isValidBST(root *TreeNode) bool {
 			return false
 		}
 
-		stack = append(stack, boundNode{&node.Val, node.Left, item.min}, boundNode{&node.Val, node.Right, item.max})
+		stack = append(stack, boundNode{item.min, &node.Val, node.Left}, boundNode{&node.Val, item.max, node.Right})
 	}
 
 	return true
-}
-
-func invertTree(root *TreeNode) *TreeNode {
-	stack := []*TreeNode{root}
-	for len(stack) > 0 {
-		node := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-
-		if node == nil {
-			continue
-		}
-
-		node.Left, node.Right = node.Right, node.Left
-		stack = append(stack, node.Left, node.Right)
-	}
-
-	return root
 }
