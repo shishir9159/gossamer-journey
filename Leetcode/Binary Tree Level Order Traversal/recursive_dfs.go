@@ -12,7 +12,6 @@ func levelOrder(root *TreeNode) [][]int {
 
 	var dfs func(node *TreeNode, depth int)
 	dfs = func(node *TreeNode, depth int) {
-
 		if node == nil {
 			return
 		} else if len(order) == depth {
