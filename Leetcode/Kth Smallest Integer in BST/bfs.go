@@ -8,19 +8,26 @@
  */
 
 func kthSmallest(root *TreeNode, k int) int {
-	var order []int
-
-	var dfs func(node *TreeNode)
-	dfs = func(node *TreeNode) {
-		if node == nil || len(order) == k {
-			return
-		}
-
-		dfs(node.Left)
-		order = append(order, node.Val)
-		dfs(node.Right)
+	if root == nil {
+		return nil
 	}
 
-	dfs(root)
+	var order []int
+	queue := []*TreeNode{root}
+
+	for len(queue) > 0 {
+		node := queue[0]
+		queue, order = queue[1:], node.Val
+
+		if node.Left != nil {
+			queue = append(queue, node.Left)
+		}
+
+		if node.Right != nil {
+			queue = append(queue, node.Right)
+		}
+	}
+
+	sort.Ints(order)
 	return order[k-1]
 }
