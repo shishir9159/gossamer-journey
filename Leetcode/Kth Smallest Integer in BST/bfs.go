@@ -17,7 +17,7 @@ func kthSmallest(root *TreeNode, k int) int {
 
 	for len(queue) > 0 {
 		node := queue[0]
-		queue, order = queue[1:], node.Val
+		queue, order = queue[1:], append(order, node.Val)
 
 		if node.Left != nil {
 			queue = append(queue, node.Left)
